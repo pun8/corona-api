@@ -9,7 +9,8 @@ const State = require('../models/states')
 const router = express.Router()
 
 async function main(){
-    const browser =await pup.launch({headless: true, executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'})
+    // const browser =await pup.launch({headless: true, executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'})
+    const browser =await pup.launch({headless: true})
 
     try{
         const page =  await browser.newPage()
