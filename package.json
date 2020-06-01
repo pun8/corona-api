@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "env-cmd -f ./config/dev.env nodemon app.js",
-    "start":"node app.js"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.7",
     "numeral": "^2.0.6",
+    "puppeteer": "^3.2.0",
     "puppeteer-core": "^2.1.1",
     "waitforselector": "^1.4.0"
   },
