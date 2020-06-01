@@ -10,7 +10,7 @@ const router = express.Router()
 
 async function main(){
     // const browser =await pup.launch({headless: true, executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'})
-    const browser =await pup.launch({headless: true})
+    const browser =await pup.launch({headless: true, args:['--no-sandbox','--disable-setuid-sandbox']})
 
     try{
         const page =  await browser.newPage()
