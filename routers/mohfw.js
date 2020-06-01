@@ -10,11 +10,12 @@ const router = express.Router()
 
 async function main(){
     // const browser =await pup.launch({headless: true, executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'})
-    const browser =await pup.launch({headless: true, args:['--no-sandbox','--disable-setuid-sandbox']})
+    const browser =await pup.launch({headless: true, args: ['--no-sandbox'] })
+    console.log("i'm in main")
 
     try{
         const page =  await browser.newPage()
-
+        console.log("scraping now")
         await page.goto('https://www.mohfw.gov.in/')
         await page.waitForSelector('#state-data')
         const button = await page.$('#state-data')
