@@ -1,7 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const cheerio = require('cheerio')
-const pup = require('puppeteer-core')
+const pup = require('puppeteer')
 
 const State = require('../models/states')
 
