@@ -2,6 +2,7 @@ const express = require('express')
 const axios = require('axios')
 const cheerio = require('cheerio')
 const pup = require('puppeteer')
+const moment = require('moment')
 
 const State = require('../models/states')
 
@@ -48,9 +49,11 @@ async function main(){
 router.post('/mohfw', async(req,res)=>{
 
     try{
-        const nowDate = new Date(); 
-        const wdate = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); 
-        console.log(wdate)
+        console.log(moment().add('5', 'hours'))
+        // const nowDate = new Date();  //indian server
+        const wdate = moment().add('5', 'hours').format('YYYY-M-D'); //usa server
+        // const wdate = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); //india server
+        // console.log(wdate)
         const data = await main()
         // console.log(data)
         data.forEach(async(state)=>{
