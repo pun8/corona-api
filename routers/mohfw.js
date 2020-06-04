@@ -3,6 +3,8 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const pup = require('puppeteer')
 const moment = require('moment')
+const num = require('numeral')
+
 
 const State = require('../models/states')
 
@@ -26,8 +28,8 @@ async function main(){
         const states = await page.evaluate(() => {
             let rows = document.querySelectorAll("tbody tr");
             const rowArray = Array.from(rows);
-            // last time there were 35 states 
-            const objs =  rowArray.slice(0,35).map(tr => {
+            // last time there were 35+1 states 
+            const objs =  rowArray.slice(0,36).map(tr => {
               const dataNodeList = tr.querySelectorAll('td');
               const dataArray = Array.from(dataNodeList);
               const [ no, name, active, cured, death, confirmed] = dataArray.map(td => td.textContent);
@@ -45,6 +47,14 @@ async function main(){
     }
 }
 
+async function gethtml(url){
+    try{
+        const result = await axios.get(url)
+        return cheerio.load(result.data)
+    }catch(e){
+        console.log(e)
+    }
+}
 
 router.post('/mohfw', async(req,res)=>{
 
@@ -80,7 +90,10 @@ router.post('/mohfw', async(req,res)=>{
             },{new: true, useFindAndModify: false, upsert: true})
         })
 
-        
+        const $ = await gethtml('https://www.icmr.gov.in/')
+        const tt = num($('.scf-text h2').first().text()).value()
+        const tt2 = num($('.scf-text h2').last().text()).value() //last 24 hours
+
         try{
             await State.deleteOne({name: 'Total',date:wdate})
             await State.aggregate([{ $match: { date:wdate } },{
@@ -103,7 +116,8 @@ router.post('/mohfw', async(req,res)=>{
                     cured : res[0].cured,
                     death: res[0].death,
                     active:res[0].active,
-                    date:wdate
+                    date:wdate,
+                    tests: tt
             },{new: true, useFindAndModify: false, upsert: true})
         }) } catch {
             console.log('eh')

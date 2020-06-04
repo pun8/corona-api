@@ -20,6 +20,9 @@ const stateschema = new schema({
     },
     date:{
         type: String
+    },
+    tests:{
+        type: Number
     }
 },{ timestamps: true})
 const state = mongoose.model('state', stateschema)
