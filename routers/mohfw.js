@@ -59,7 +59,7 @@ async function gethtml(url){
 router.post('/mohfw', async(req,res)=>{
 
     try{
-        console.log(moment().add('5', 'hours'))
+        console.log(moment().add('6', 'hours'))
         // const nowDate = new Date();  //indian server
         const wdate = moment().add('5', 'hours').format('YYYY-M-D'); //usa server
         // const wdate = nowDate.getFullYear()+'-'+(nowDate.getMonth()+1)+'-'+nowDate.getDate(); //india server
