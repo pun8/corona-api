@@ -28,8 +28,8 @@ async function main(){
         const states = await page.evaluate(() => {
             let rows = document.querySelectorAll("tbody tr");
             const rowArray = Array.from(rows);
-            // last time there were 35+1 states 
-            const objs =  rowArray.slice(0,36).map(tr => {
+            // last time there were 35+1 states (-1 for total# and cases being reassigned is gone) 
+            const objs =  rowArray.slice(0,35).map(tr => {
               const dataNodeList = tr.querySelectorAll('td');
               const dataArray = Array.from(dataNodeList);
               const [ no, name, active, cured, death, confirmed] = dataArray.map(td => td.textContent);
