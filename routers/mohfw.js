@@ -32,10 +32,10 @@ async function main(){
             const objs =  rowArray.slice(0,35).map(tr => {
               const dataNodeList = tr.querySelectorAll('td');
               const dataArray = Array.from(dataNodeList);
-              const [ no, name, active, cured, death, confirmed] = dataArray.map(td => td.textContent);
+              const [ no, name, active,c1, cured,c2, death, c3] = dataArray.map(td => td.textContent);
 
               return {
-                 no, name, active, cured, death, confirmed
+                 no, name, active, cured, death
               };
             })
             return objs
@@ -81,7 +81,7 @@ router.post('/mohfw', async(req,res)=>{
             },
                 {
                 name: state.name,
-                confirmed: state.confirmed,
+                confirmed: num(state.cured).value()+ num(state.death).value()+ num(state.active).value(),
                 cured : state.cured,
                 death: state.death,
                 active: state.active,
