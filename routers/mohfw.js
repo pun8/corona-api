@@ -35,7 +35,7 @@ async function main(){
               const [ no, name, active,c1, cured,c2, death, c3] = dataArray.map(td => td.textContent);
 
               return {
-                 no, name, active, cured, death
+                 no, name, active,c1, cured,c2, death,c3
               };
             })
             return objs
@@ -81,8 +81,7 @@ router.post('/mohfw', async(req,res)=>{
             },
                 {
                 name: state.name,
-                // confirmed: num(state.cured).value()+ num(state.death).value()+ num(state.active).value(),
-                confirmed: state.cured,
+                confirmed: num(state.cured).value()+ num(state.death).value()+ num(state.active).value(),
                 cured : state.cured,
                 death: state.death,
                 active: state.active,
