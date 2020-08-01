@@ -81,7 +81,8 @@ router.post('/mohfw', async(req,res)=>{
             },
                 {
                 name: state.name,
-                confirmed: num(state.cured).value()+ num(state.death).value()+ num(state.active).value(),
+                // confirmed: num(state.cured).value()+ num(state.death).value()+ num(state.active).value(),
+                confirmed: state.cured,
                 cured : state.cured,
                 death: state.death,
                 active: state.active,
